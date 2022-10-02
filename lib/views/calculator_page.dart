@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:vishnu_calculator/service/calculation_service.dart';
-
 import '../widgets/constants.dart';
 
 class CalCulatorPage extends StatefulWidget {
@@ -28,7 +27,6 @@ class _CalCulatorPageState extends State<CalCulatorPage> {
 
   getData() async {
     calculations = await CalculationService().getCalculations();
-    print(calculations);
   }
 
   // calculator display
@@ -317,7 +315,7 @@ class _CalCulatorPageState extends State<CalCulatorPage> {
           ContextModel contextModel = ContextModel();
           equation = result + buttonText;
           result =
-              "${expression.evaluate(EvaluationType.REAL, contextModel).toStringAsFixed(1)}";
+              "${BigInt.from(expression.evaluate(EvaluationType.VECTOR, contextModel))}";
           storeData(equation + result);
         } catch (err) {
           result = err.toString();
